@@ -117,6 +117,8 @@ lib-y += xgetcwd.o
 lib-y += xgethostbyname.o
 lib-y += xreadlink.o
 lib-y += xrealloc_vector.o
+# android
+lib-y += android.o
 
 lib-$(CONFIG_MOUNT) += match_fstype.o
 lib-$(CONFIG_UMOUNT) += match_fstype.o

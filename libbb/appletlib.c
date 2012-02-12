@@ -779,6 +779,11 @@ int busybox_main(int argc UNUSED_PARAM, char **argv)
 
 		dup2(1, 2);
 		full_write2_str(bb_banner); /* reuse const string */
+#ifdef __ANDROID_API__
+		full_write2_str(" (android-");
+		full_write2_str(itoa(__ANDROID_API__));
+		full_write2_str(")");
+#endif
 		full_write2_str(" multi-call binary.\n"); /* reuse */
 		full_write2_str(
 			"BusyBox is copyrighted by many authors between 1998-2015.\n"

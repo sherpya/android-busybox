@@ -108,7 +108,9 @@
 #include "libbb.h"
 #include <math.h>
 #include <netinet/ip.h> /* For IPTOS_DSCP_AF21 definition */
+#ifndef __BIONIC__
 #include <sys/timex.h>
+#endif
 #ifndef IPTOS_DSCP_AF21
 # define IPTOS_DSCP_AF21 0x48
 #endif

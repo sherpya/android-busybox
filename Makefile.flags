@@ -47,7 +47,11 @@ endif
 # gcc 3.x emits bogus "old style proto" warning on find.c:alloc_action()
 CFLAGS += $(call cc-ifversion, -ge, 0400, -Wold-style-definition)
 
-ifneq ($(CC),clang)
+ifeq ($(shell $(CC) -v 2>&1 | grep -c "clang version"), 1)
+COMPILER := clang
+endif
+
+ifneq ($(COMPILER),clang)
 # "clang-9: warning: optimization flag '-finline-limit=0' is not supported
 CFLAGS += $(call cc-option,-finline-limit=0,)
 endif
@@ -59,13 +63,15 @@ CFLAGS += $(call cc-option,-fno-guess-branch-probability,)
 CFLAGS += $(call cc-option,-funsigned-char,)
 
 ifeq ($(CONFIG_STATIC_LIBGCC),y)
+ifneq ($(COMPILER),clang)
 # Disable it, for example, if you get
 # "clang-9: warning: argument unused during compilation: '-static-libgcc'"
 CFLAGS += $(call cc-option,-static-libgcc,)
 endif
+endif
 
 CFLAGS += $(call cc-option,-falign-functions=1,)
-ifneq ($(CC),clang)
+ifneq ($(COMPILER),clang)
 # "clang-9: warning: optimization flag '-falign-jumps=1' is not supported" (and same for other two)
 CFLAGS += $(call cc-option,-falign-jumps=1 -falign-labels=1 -falign-loops=1,)
 endif
@@ -78,7 +84,7 @@ CFLAGS += $(call cc-option,-fno-asynchronous-unwind-tables,)
 CFLAGS += $(call cc-option,-fno-builtin-printf,)
 
 # clang-9 does not like "str" + N and "if (CONFIG_ITEM && cond)" constructs
-ifeq ($(CC),clang)
+ifeq ($(COMPILER),clang)
 CFLAGS += $(call cc-option,-Wno-string-plus-int -Wno-constant-logical-operand)
 endif
 
@@ -184,8 +190,11 @@ LDLIBS += $(if $(SELINUX_LIBS),$(SELINUX_LIBS:-l%=%),$(SELINUX_PC_MODULES:lib%=%
 endif
 
 ifeq ($(CONFIG_FEATURE_NSLOOKUP_BIG),y)
-ifneq (,$(findstring linux,$(shell $(CC) $(CFLAGS) -dumpmachine)))
+TARGETOS=$(shell $(CC) $(CFLAGS) -dumpmachine)
+ifneq (,$(findstring linux,$(TARGETOS)))
+ifeq (,$(findstring android,$(TARGETOS)))
 LDLIBS += resolv
+endif
 endif
 endif
 
