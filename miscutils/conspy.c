@@ -42,7 +42,11 @@
 
 #include "libbb.h"
 #include "common_bufsiz.h"
+#ifdef __BIONIC__
+#include <linux/kd.h>
+#else
 #include <sys/kd.h>
+#endif
 
 #define ESC "\033"
 #define CURSOR_ON	-1

@@ -111,6 +111,9 @@ lib-y += xgetcwd.o
 lib-y += xgethostbyname.o
 lib-y += xreadlink.o
 lib-y += xrealloc_vector.o
+# android
+lib-y += android.o
+lib-y += cfsetspeed.o
 
 lib-$(CONFIG_PLATFORM_LINUX) += match_fstype.o
 

@@ -71,7 +71,7 @@ asm(                                                      \
    "addl %%eax,%0 \n\t"                                   \
    "adcl $0,%%edx \n\t"                                   \
    "movl %%edx,%1 \n\t"                                   \
-:"=g"(_c[LO]), "=r"(cy)                                   \
+:"=g"(_c[LO]), "=g"(cy)                                   \
 :"0"(_c[LO]), "1"(cy), "g"(mu), "g"(*tmpm++)              \
 : "%eax", "%edx", "%cc")
 

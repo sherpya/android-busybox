@@ -43,6 +43,7 @@
 //usage:     "\n	-e	Display other/more information"
 //usage:     "\n	-A inet" IF_FEATURE_IPV6("{6}") "	Select address family"
 
+#include <sys/socket.h>
 #include <net/route.h>
 #include <net/if.h>
 

@@ -34,9 +34,7 @@
 //usage:     "\n	-p TCONST"
 
 #include "libbb.h"
-#ifdef __BIONIC__
-# include <linux/timex.h>
-#else
+#ifndef __BIONIC__
 # include <sys/timex.h>
 #endif
 
