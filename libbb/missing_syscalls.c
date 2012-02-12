@@ -46,4 +46,14 @@ int tcdrain(int fd)
 	return ioctl(fd, TCSBRK, 1);
 }
 # endif
+
+int swapon(const char *path, int swapflags)
+{
+    return syscall(__NR_swapon, path, swapflags);
+}
+
+int swapoff(const char *path)
+{
+    return syscall(__NR_swapoff, path);
+}
 #endif

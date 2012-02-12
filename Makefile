@@ -1,7 +1,7 @@
 VERSION = 1
 PATCHLEVEL = 26
 SUBLEVEL = 0
-EXTRAVERSION = .git
+EXTRAVERSION = .git-sherpya
 NAME = Unnamed
 
 # *DOCUMENTATION*
@@ -464,6 +464,7 @@ core-y		:= \
 		applets/ \
 
 libs-y		:= \
+		android/ \
 		archival/ \
 		archival/libarchive/ \
 		console-tools/ \

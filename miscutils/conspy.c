@@ -43,7 +43,7 @@
 
 #include "libbb.h"
 #include "common_bufsiz.h"
-#include <sys/kd.h>
+#include <linux/kd.h>
 
 #define ESC "\033"
 #define CURSOR_ON	-1

@@ -27,6 +27,9 @@
 
 #include <net/if.h>
 #include <netinet/ip_icmp.h>
+#ifdef __BIONIC__
+#include <linux/icmp.h>
+#endif
 #include "libbb.h"
 #include "common_bufsiz.h"
 

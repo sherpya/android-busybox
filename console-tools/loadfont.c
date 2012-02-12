@@ -30,7 +30,7 @@
 //usage:       "$ setfont -m koi8-r /etc/i18n/fontname\n"
 
 #include "libbb.h"
-#include <sys/kd.h>
+#include <linux/kd.h>
 
 #ifndef KDFONTOP
 # define KDFONTOP 0x4B72
