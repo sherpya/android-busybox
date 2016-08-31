@@ -10,6 +10,10 @@
 #include <stdlib.h>
 #include "libbb.h"
 
+/* Usual "this only works for ascii compatible encodings" disclaimer. */
+#undef _tolower
+#define _tolower(X) ((X)|((char) 0x20))
+
 struct mntent *getmntent_r(FILE *fp, struct mntent *mnt, char *buf, int buflen)
 {
 	char *tokp = NULL, *s;
