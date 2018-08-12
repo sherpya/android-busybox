@@ -5,7 +5,7 @@
 
   adding your preferred architecture to the command line like `--arch=arm` and if you want
 
-  platform using something like `--platform=platform-21`, use --help to see the default (needed later)
+  platform using something like `--platform=21`, use --help to see the default (needed later)
 - after a while the script will outputs something like `Package installed to /tmp/ndk-sherpya`
 - in that folder you will find `arm-linux-androideabi.tar.bz2` (depending on the given arch)
 - unpack this archive somewhere like in your home directory: `tar xjvf arm-linux-androideabi.tar.bz2 -C ~`
