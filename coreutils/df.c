@@ -98,7 +98,7 @@
 //usage:       "/dev/sda3             17381728  17107080    274648      98% /\n"
 
 #include <mntent.h>
-#include <sys/statvfs.h>
+#include <sys/vfs.h>
 #include "libbb.h"
 #include "unicode.h"
 
@@ -117,7 +117,7 @@ int df_main(int argc UNUSED_PARAM, char **argv)
 	unsigned opt;
 	FILE *mount_table;
 	struct mntent *mount_entry;
-	struct statvfs s;
+	struct statfs s;
 	enum {
 		OPT_KILO     = (1 << 0),
 		OPT_POSIX    = (1 << 1),
@@ -245,7 +245,7 @@ int df_main(int argc UNUSED_PARAM, char **argv)
 				continue;
 		}
 
-		if (statvfs(mount_point, &s) != 0) {
+		if (statfs(mount_point, &s) != 0) {
 			bb_simple_perror_msg(mount_point);
 			goto set_error;
 		}
